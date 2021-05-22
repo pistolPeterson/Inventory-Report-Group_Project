@@ -22,4 +22,8 @@ public class Address {
 		return state;
 	}
 	
+	String getZip() {
+		return zipCode;
+	}
+	
 }

@@ -80,10 +80,29 @@ public class TestReport {
                 
             case 3: 
                 // shows all deleted products
-
+            	ArrayList deletelist = close.getList();
+				if(deletelist.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "List is empty");
+				}else
+				{
+					int i= 0;
+					int length = db.size();
+					String s = "Product:\tPurchase Date\tManufacturer\tState\n";
+					while(i<length)
+					{
+						Product p = (Product)deletelist.get(i);
+						
+						s = s + p.getProdName() + "\t" + p.getDate()  + "\t"   + p.getManu().getManuName()+ "\t" + p.getManu().getManuAddress().getZip() + "\n";
+						i++;
+					}
+					display(s,"Deleted Products",0);
+				}
+				break;
             	
             	
-                break;
+            	
+            	
+            
             case 4: 
                 // updates product information
             	String searchProdName = GetData.getWord("Enter name of product you'd like to update");
@@ -150,6 +169,20 @@ public class TestReport {
                 break;
             case 6:
                 //Delete a product
+            
+            	String deleteProdName = GetData.getWord("Enter name of product you wish to delete?");
+            	db.search(deleteProdName);
+            	
+            	if(!db.inList()) {
+            		JOptionPane.showMessageDialog(null, "Product not found");
+            		
+            	} else {
+            		Product delProd = db.getProduct();
+            		int index = db.showIndex();
+            	
+            		close.add(db.delete(index));
+            		JOptionPane.showMessageDialog(null, "The product " + delProd.getProdName() + " has been deleted!");
+            	}
 
                 break;
             case 7: 
@@ -172,7 +205,7 @@ public class TestReport {
 	
 	//display method that displays the inventory reports 
     static void display(String s, String heading, int MESSAGE_TYPE ) {
-	JTextArea text = new JTextArea(s, 15, 20);
+	JTextArea text = new JTextArea(s, 25, 40);
 	JScrollPane pane = new JScrollPane(text);
  JOptionPane.showMessageDialog(null, pane, heading, MESSAGE_TYPE);
 	

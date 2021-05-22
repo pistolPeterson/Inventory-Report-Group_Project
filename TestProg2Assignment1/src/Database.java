@@ -20,6 +20,12 @@ public class Database {
 	void add(Product P){
         list.add(P);
     }
+	
+	//deletes the created product object from the list database
+	 Product delete(int i) {
+		return list.remove(i); 
+	}
+	
 
 	//search method that returns an index to use for delete and add methods
 	void search(String P) { //search method with parameter of the product name
@@ -42,7 +48,7 @@ public class Database {
 	
 	
 	
-	// I dont know what this does yet 
+	//
 	  ArrayList<Product> getList() {
 		 return list;
 	 }
@@ -62,6 +68,8 @@ public class Database {
 	Product getProduct(){
 		return pd;
 	}
+
+	
 
 	
 	
